@@ -1,9 +1,9 @@
 #!/bin/bash
 # declare variables
 # You can enable the log feature by uncommenting the next line, and the last line
-# LOGFILE="/home/max/update.log" # the location of the log file
-sourceDir="/home/max/2b2tmcpe_dev/Nukkit_version"
-serverDir="/home/max/2b2tmcpe_dev/nukkitTestSrvr"
+# LOGFILE="/path/to/update.log" # the location of the log file
+sourceDir="/path/to/sourceDiretory"
+serverDir="/path/to/serverDirectory"
 # Check if the user is in root
 if (( $EUID != 0)); then
     echo "Please run the updater as root"
@@ -26,6 +26,7 @@ pkill java
 sleep 10
 echo "restart completed"
 echo "Attention: if you don't have an auto-restart script, you have to manually restart the server"
+# Write log into the log file, uncomment the next line to enable logging feature
 # echo "$(date "+%m%d%Y %T") : Update completed." >> $LOGFILE 2>&1
 
 

@@ -1,7 +1,7 @@
 # updateScriptForNukkit
-This is a bash script that will allow you to update nukkit to the newest release when running the script
+This is a bash script that will allow you to update nukkitx to the newest release when running the script
 
-If you have never installed nukkit before, it will automatically download the nukkit jar file
+If you have never installed nukkitx before, it will automatically download the nukkit jar file
 
 # Auto update
 Using Crontab or the watch command to run this script, will allow you to auto update nukkit periodically.

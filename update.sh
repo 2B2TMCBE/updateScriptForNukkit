@@ -5,6 +5,7 @@
 MAVENLOG="/path/to/maven.log" #Log any error that maven encountered
 sourceDir="/path/to/sourceDir" # the target directory for downloading the jar file
 serverDir="/path/to/serverDir" # the directory where the server files
+jarName="Server.jar" # the name of the .jar name after updating
 # CHECK=true # check if update succeed (useless at the moment)
 
 # Check if the user is in root
@@ -34,14 +35,14 @@ mvn clean package >> $MAVENLOG 2>&1
 cd target
 
 echo "updating nukkit, this might take a while..."
-mv nukkit-1.0-SNAPSHOT.jar server.jar
-cp server.jar $sourceDir
+mv nukkit-1.0-SNAPSHOT.jar $jarName
+cp $jarName $sourceDir
 cd $sourceDir
-cp server.jar $serverDir
+cp $jarName $serverDir
 
 # this is the algorithm of the build check
 cd $sourceDir
-MODIFYDATE=$(date -r server.jar +%m%d%Y)
+MODIFYDATE=$(date -r $jarName +%m%d%Y)
 DATE=$(date +%m%d%Y)
 echo $MODIFYDATE
 echo $DATE
@@ -58,11 +59,11 @@ if [ "$MODIFYDATE" -eq "$DATE" ]
 	cd $sourceDir
 	wget -P $sourceDir \
 	https://ci.nukkitx.com/job/NukkitX/job/Nukkit/job/master/lastSuccessfulBuild/artifact/target/nukkit-1.0-SNAPSHOT.jar
-	mv nukkit-1.0-SNAPSHOT.jar server.jar
-	cp server.jar $serverDir
+	mv nukkit-1.0-SNAPSHOT.jar $jarName
+	cp $jarName $serverDir
 	# initialize check 2
 	cd $serverDir
-	MODIFYDATEM2=$(date -r server.jar +%m%d%Y)
+	MODIFYDATEM2=$(date -r $jarName +%m%d%Y)
 	echo $MODIFYDATEM2
 	echo $DATE
 	# This method check from $serverDir instead of $sourceDir
@@ -94,5 +95,5 @@ echo "Attention: if you don't have an auto-restart script, you have to manually 
 # fi
 # echo "$(date "+%m%d%Y %T") : Update succeed." >> $LOGFILE 2>&1
 # rm -r /home/ubuntu/Nukkit
-# date -r server.jar +%m%d%Y
+# date -r $jarName +%m%d%Y
 
